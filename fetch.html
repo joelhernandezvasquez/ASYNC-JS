@@ -1,0 +1,39 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <script>
+    
+    fetch("https://api.github.com/users/joelhernandezvasquez/repos")
+    .then(response => response.json())
+    .then(data => 
+    {
+        const repos = data.map(item =>
+        {
+            return {
+                name:item.name,
+                url:item['html_url'],
+                stars:item["stargazers_count"]
+            }
+        })
+       
+        const menu = document.createElement("ol");
+        menu.innerHTML = repos.map(repo =>
+        {
+            return `<li>
+                    <a href="${repo.url}"</a> ${repo.name} (${repo.stars}) </a> </li>`
+        }).join('');
+        document.body.appendChild(menu);
+    });
+
+
+
+    </script>
+
+</body>
+
+</html>
